@@ -1,0 +1,18 @@
+<!--modal_item_show -->
+     <div class="modal_win" id="modal_show_item">
+        <div class="modal_close" id="modal_close_modal_show_item">&times;</div>
+        <div class="modal_show_item_img">
+            <img src="img/cat1.jpg">
+        </div>
+        <div class="modal_show_item_info">
+            <ul>
+                <li class="item_name_tag" id="item_name_modal_show">Title</li>
+                <li class="item_category_tag">&#9734; Пташечки</li>
+                <li class="item_price_tag">UAH: 100</li>
+                <li class="item_descr_tag" id="item_descr_modal_show">Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Doloremque dolores ab eos suscipit voluptatibus non facilis necessitatibus aut architecto quibusdam. 
+                    Nobis quis iste eveniet ratione minus adipisci officiis.</li>
+            </ul>
+
+        </div>
+    </div>

@@ -1,0 +1,95 @@
+/*--------ITEMS------------------*/
+.container_items {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+
+    max-width: 100%;
+    justify-content: justify-content;
+    min-height: 400px;
+ 
+}
+.item {
+    background: ivory;
+    width: 280px;
+    min-height: 400px;
+    margin: 10px;
+    
+    box-shadow: 3px 3px 3px 1px rgba(3, 3, 3, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.item_name, .item_btn_more_info {
+    margin: 0 auto;
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+
+
+
+    
+
+
+.item_btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.item img {
+    margin: 10px;
+    width: 90%;
+}
+
+.item_btn_more_info {
+    background: #3EB5CF;
+    width: 175px;
+    height: 62px; 
+    margin: 10px 5px;
+    text-decoration: none;
+    color: ivory;
+    cursor: pointer;
+}
+
+.item_btn_add_to_cart {
+    background: #00A046;
+    height: 62px;
+    margin: 10px 5px;
+    cursor: pointer;
+}
+.item_btn_add_to_cart img{
+    width: 50px;
+    height: 42px;
+}
+
+.item_name h4 {
+    font-family: Roboto, Helvetica, sans-serif;
+    font-family: cursive;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn_item_edit {
+    position: relative;
+}
+
+.btn_item_edit img{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 5px;
+    right: -130px;
+
+    cursor: pointer;
+}
+

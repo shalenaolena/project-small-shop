@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/catalog.css">
+    <link rel="stylesheet" href="style/modal.css">
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+<link href="https://fonts.googleapis.com/css2?family=Rum+Raisin&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="main_shop" id = "main_shop_div">
+<!-----------HEADER------------->
+        <header id = "header_box">
+            <div id="logo">
+                <span id="logo_text">Shop</span>
+            </div>
+            <div id="buttons">
+                <div class = "header_input_search" id="div_input_search">
+                        <form>
+                          <input type="text" placeholder="">
+                          <button type="submit"><img id="search_img" src="icons/search2.png" alt=""></button>
+                        </form>
+                    
+                </div>
+                <div class = "header_button" id="user"><a href="#"><img src="icons/user.png" alt="" ></a></div>
+                <div class = "header_button" id="white-cart"><a href="#"><img src="icons/white-cart.png" alt="" ></a></div>
+            </div>
+        </header>
+<!-----------CATEGORY and FILTER------------->
+        <div class="main_info">
+            <div class="category main_info_inner_blok">
+                <h2 id="category_name_h2">Усі товари</h2> 
+            </div>
+            <div class="main_manage_btns main_info_inner_blok">
+                <div class="manage_btn" id = "btn_add_item">
+                    <img src="icons/add.png" alt="">
+                </div>
+                <div class="manage_btn" id = "btn_filter">
+                    <img src="icons/filter.png" alt="">
+                </div>
+            </div> 
+        </div>
+<!-----------ITEMS------------->
+        
+        <div class="container_items" id="container_items_catalog">
+
+            <!-- <div class="item" id="">
+                <div class="btn_item_edit">
+                    <img src="icons/edit.png" alt="">
+                </div>
+                <img src="img/cat1.jpg" alt="">
+                <div class="item_data_blok">
+                    <div class="item_name">
+                        <h3>Назва тваринки</h3>
+                        <h4 class = "item_price">Ціна: 100 грн</h4>
+                    </div>
+                    <div class="item_btns">
+                        <div class="item_btn_more_info">
+                            Деталі
+                        </div>
+                        <div class="item_btn_add_to_cart">
+                           
+                                <img src="icons/white-cart.png" alt="">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>  -->
+
+            
+
+        </div> <!--container_items -->
+
+<!-- Modal -->
+    <div class="modal_overlay modal_win" id="modal_overlay_id">
+
+        <!-- Item Add Edit -->
+        <div class="modal_form_item modal_win" id="modal_item_add_edit">
+            <div class="modal_close" id="modal_close_item_add_edit">&times;</div>
+            <form action="#" class="feed_form">
+                <select name="category" id="modal_item_select_category">
+                    <option value="Cats">Котики</option>
+                    <option value="Dogs">Собачки</option>
+                    <option value="Birds">Пташечки</option>
+                    <option value="Other">Інші</option>
+                  </select>
+                <input type="text" name="name" id="modal_form_item_name" placeholder="Назва">
+                <input type="text" name="price" id="modal_form_item_price" placeholder="Price">
+                <input type="text" name="url" id="modal_form_item_img_url" placeholder="Image URL 500x500" value="img/tit1.jpg">
+                <textarea name="description" id="modal_form_textarea_item_description" cols="20" rows="10" placeholder="Опис"></textarea>
+                <button id="modal_item_add_edit_btn">НАДІСЛАТИ</button>
+            </form>
+        </div> <!-- modal_form_item -->
+
+
+
+
+    </div> <!-- modal_overlay -->
+
+      
+
+    
+    
+    <div class="modal_filter modal_win" id="modal_filter_id">
+        <div class="modal_close" id="modal_close_filter">&times;</div>
+        <h3>Оберіть категорію:</h3>
+        <select name="category" class="select_filter" id="select_filter_category">
+            <option value="All">Всі</option>
+            <option value="Cats">Котики</option>
+            <option value="Dogs">Собачки</option>
+            <option value="Birds">Пташечки</option>
+            <option value="Other">Інші</option>
+          </select>
+
+          <h3>Сортування:</h3>
+
+          <select name="sort" class="select_filter" id="select_filter_sort">
+            <option value="by_name">За назвою</option>
+            <option value="by_price">За ціною</option>
+          </select>
+
+          <button class="filter_submit">OK</button>
+
+    </div> <!-- modal_filter -->
+
+
+     
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="scripts/shop.js"></script>
+</body>
+</html>

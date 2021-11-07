@@ -1,0 +1,131 @@
+/*Modal Forms*/
+.modal_overlay {
+    position:fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 3, 3, 0.8);
+}
+
+/********** Modal Form Add/Edit ********/
+.modal_form_item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-left: 20px;
+    width: 500px;
+    min-height: 500px;
+    background-color: #3EB5CF;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modal_close{
+    position: absolute;
+    top: 0;
+    right: -50px;
+    line-height: 25px;
+    font-size: 60px;
+    color: #3EB5CF;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.feed_form {
+    display: none;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.feed_form input, select, option, textarea, button {
+    height: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 15px;
+    padding: 0 20px;
+    border: none;
+    font-size: 20px;
+    color: rgb(82, 82, 82);
+}
+
+
+.feed_form textarea {
+    height: 120px;
+    padding-top: 10px;
+}
+
+.feed_form button {
+    background-color: #00A046;
+    color: ivory;
+    cursor: pointer;
+}
+
+
+/*** Filter ***/
+.modal_filter {
+    width: 35%;
+    min-height: 50%;
+    background-color: #3EB5CF;
+    padding: 20px;
+    /* border-radius: 15px; */
+
+    position: fixed;
+    top: 100px;
+    right: 0;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal_filter_chose_category {
+    margin-top: 30px;
+}
+
+#modal_close_filter {
+    position: absolute;
+    top: 5px;
+    left: -40px;
+    line-height: 25px;
+    font-size: 60px;
+    color: #3EB5CF;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.filter_submit {
+    width: 150px;
+    cursor: pointer;
+    padding-top: 5px;
+    background-color: #00A046;
+    color:ivory;
+}
+
+div.modal_filter h3 {
+    color: ivory;
+}
+
+div.modal_filter h3, div.modal_filter select, div.modal_filter button {
+   margin: 10px;
+   width: 75%;
+}
+
+select {
+    border-radius: 0;
+}
+
+
+/* ** Display: NONE ** */
+
+.modal_win {
+    display: none;
+}
