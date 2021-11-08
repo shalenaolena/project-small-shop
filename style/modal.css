@@ -123,6 +123,124 @@ select {
     border-radius: 0;
 }
 
+/*** INFO ***/
+
+div.modal_win_info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-left: 20px;
+    max-width: 800px;
+    min-height: 500px;
+    background-color: ivory;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border: thick double #3EB5CF;
+    
+    
+}
+
+.info_img, .info_text {
+    width: 420px;
+    height: 90%;
+    margin: 10px;
+    
+}
+
+.info_img img{
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.info_text {
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: 20px;
+}
+
+.info_text ul {
+    margin-left: 0; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+    list-style-type: none;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+.info_text li {
+    margin-bottom: 10px;
+}
+
+#item_name_info {
+    font-family: Roboto, Helvetica, sans-serif;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.modal_win_info_edit_bths {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    cursor: pointer;
+    
+}
+
+#edit_item_select_category, #edit_item_name, #edit_item_price, #edit_item_img_url, #edit_item_description {
+    width: 300px;
+    min-height: 40px;
+    margin: 5px;
+    border: thick double #3EB5CF;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+#edit_item_description {
+    min-height: 120px;
+}
+
+#edit_item_btn {
+    background-color: #00A046;
+    width: 300px;
+    min-height: 40px;
+    cursor: pointer;
+    color:ivory;
+}
+
+
+/*Small Message!!!*/
+.modal_massege_overlay {
+    display: none;
+    position: relative;
+}
+.modal_massege {
+    width: 300px;
+    min-height: 100px;
+
+    padding: 10px;
+
+    position: fixed;
+    top: 20px;
+    left: 50%;
+
+    background-color: rgba(76, 170, 84, 0.8);
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
 
 /* ** Display: NONE ** */
 

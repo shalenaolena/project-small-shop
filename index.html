@@ -82,10 +82,15 @@
 <!-- Modal -->
     <div class="modal_overlay modal_win" id="modal_overlay_id">
 
+<!-- ADD EDIT FORM -->
+
         <!-- Item Add Edit -->
         <div class="modal_form_item modal_win" id="modal_item_add_edit">
             <div class="modal_close" id="modal_close_item_add_edit">&times;</div>
             <form action="#" class="feed_form">
+                <div class="img_place_add_edit" id="img_place_add_edit_id">
+                    <img src="" alt="">
+                </div>
                 <select name="category" id="modal_item_select_category">
                     <option value="Cats">Котики</option>
                     <option value="Dogs">Собачки</option>
@@ -100,14 +105,34 @@
             </form>
         </div> <!-- modal_form_item -->
 
+        <!-- Item INFO -->
+<div class="modal_win_info modal_win" id="modal_win_info_id">
+    <div class="modal_close" id="modal_close_item_add_edit">&times;</div>
+    <div class="modal_win_info_edit_bths">
+        <div id="modal_item_edit_btn" data-btn-open="">&#9997;</div>
+        <div id="modal_item_delete_btn" data-btn-open="">&#10060;</div>  
+    </div>
+     
+    <div class="info_img" id="item_img_info_id">
+        <img src="img/tit1.jpg" alt="">
+    </div>
+    <div class="info_text" id="info_text_place_id">
+        
+        <!-- <ul>
+            <li class="item_name" id="item_name_info_id"></li>
+            <li class="item_category">&#9734; <span id="item_category_info_id"></span></li>
+            <li class="item_price" id="item_price_info_id"></li>
+            <li class="item_descr" id="item_descr_modal_show"></li>
+        </ul>  -->
+        
 
-
+    </div>
+    
+</div> <!-- #modal_win_info -->
 
     </div> <!-- modal_overlay -->
 
-      
-
-    
+<!-- FILTER FORM -->
     
     <div class="modal_filter modal_win" id="modal_filter_id">
         <div class="modal_close" id="modal_close_filter">&times;</div>
@@ -131,7 +156,14 @@
 
     </div> <!-- modal_filter -->
 
-
+    <div class="modal_massege_overlay">
+        <div class="modal_massege modal.win" id="modal_massege_id">
+            <div id="modal_massege_text">
+                
+            </div>
+        </div>
+    </div>
+    
      
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
