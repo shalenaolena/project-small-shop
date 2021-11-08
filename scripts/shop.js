@@ -1,4 +1,3 @@
-
 //Магазин
 class Shop {
     constructor(shopName, arrItems, arrItemsObj){
@@ -61,9 +60,6 @@ class Shop {
 
     formData() {
         this.getDataFromLocalStorage ("arrItems"); 
-       
-        //alert(`Hello! We get ${this.arrItems.length} items in Local Storage! xoxo`); 
-        //повідомлення - актуальна кількіть товарів
 
         $("#modal_item_add_edit_btn").on("click", () => {       
 
@@ -80,21 +76,30 @@ class Shop {
             this.arrItems.push(result);
             this.setDataToLocalStorage ("arrItems", this.arrItems);
             this.getDataFromLocalStorage ("arrItems");
-            this.parseArrToClassItems (this.arrItems);
+            // this.parseArrToClassItems (this.arrItems);
 
         }) 
     }
 
     parseArrToClassItems () {
+        let newItems;
+        console.log(`!!!${this.arrItems.length}`);
         for (let i = 0; i < this.arrItems.length; i++) {
-            let newItem = new Items (this.arrItems[i]["itemId"], 
+            newItems = new Items (
+            this.arrItems[i]["itemId"], 
             this.arrItems[i].itemName, 
             this.arrItems[i].itemCategory, 
             +this.arrItems[i].itemPrice, 
             this.arrItems[i].itemImg, 
             this.arrItems[i].itemDescription);
-            this.arrItemsObj.push(newItem);
+            
+            this.arrItemsObj.push(newItems);
         }
+    }
+
+    updateArrItemsObj() {
+        this.getDataFromLocalStorage ("arrItems");                                                                                                      
+        this.parseArrToClassItems (this.arrItems); 
     }
 
     calcSum() {
@@ -106,6 +111,32 @@ class Shop {
         
     }
 
+    deleteItem() {
+        $("#modal_item_delete_btn").on("click", (event) => {
+
+            let currentItem = this.currentItemAfterEvent("data-btn-open");
+            $("#edit_item_btn").attr('data-btn-open', currentItem.itemId);
+            
+            console.log(this.arrItems);      //arr
+            console.log(currentItem.itemId); //item17
+
+            let isTrue = confirm("Видалити? ТОЧНО?!?");
+
+            if (isTrue) {
+                this.arrItems = this.arrItems.filter(function(e) { return e.itemId !== currentItem.itemId 
+                })
+            console.log(this.arrItems);
+            this.setDataToLocalStorage ("arrItems", this.arrItems);
+            this.getDataFromLocalStorage ("arrItems");
+            this.parseArrToClassItems (this.arrItems);
+                
+            }
+
+        })
+       
+    }
+
+   
 }
 
 
@@ -120,9 +151,8 @@ class Items extends Shop {
         this.itemPrice = itemPrice;
         this.itemImg = itemImg;
         this.itemDescription = itemDescription;
-        this.arrItems;
-        this.arrItemsObj;
-       
+        this.arrItems = this.arrItems;
+        this.arrItemsObj = this.arrItemsObj;
 
     }
 
@@ -170,8 +200,6 @@ class Items extends Shop {
         $(descr).html(currentItem.itemDescription);
 
     }
-
-    
     
 
     showItem () {
@@ -198,9 +226,10 @@ class Items extends Shop {
             currentItem);
             $("#item_img_info_id img").attr('src', currentItem.itemImg);
             $("#item_category_info_id").html(currentItem.itemCategory);
-            event.stopPropagation();
+            // event.stopPropagation();
 
             this.editItem ();
+            this.deleteItem();
            })    
     }
 
@@ -260,31 +289,18 @@ class Items extends Shop {
                   });
 
                   this.setDataToLocalStorage ("arrItems", this.arrItems);
-                  this.getDataFromLocalStorage ("arrItems");
-                  items.loadCatalog (shop.arrItemsObj);
+                  //this.updateArrItemsObj(); 
+                  console.log(this.arrItemsObj);
+                  shop.updateArrItemsObj();
+                  this.loadCatalog (this.arrItemsObj);
+                  
 
                 });
-
+           
 
         }
 
     )}
-
-    deleteItem() {
-        $("#modal_item_delete_btn").on("click", (event) => {
-
-            let currentItem = this.currentItemAfterEvent("data-btn-open");
-            $("#edit_item_btn").attr('data-btn-open', currentItem.itemId);
-            
-
-            console.log(this.arrItems);
-            console.log(currentItem);
-
-
-
-        })
-       
-    }
 
     
         
@@ -296,32 +312,30 @@ class Items extends Shop {
 
 const shop = new Shop("Shop", [], []);                                             //Створення магазину
 const items = new Items();                                                         //Створення экземпляру классу Items для виклику методів
-shop.shopTitle();                                                                  //Назва магазину
-shop.getDataFromLocalStorage ("arrItems");                                         //Актуальний массив данних з Local Storage                              
-shop.openModalWindowByButton( $("#btn_add_item"), $("#modal_item_add_edit") );     //Відкриття для редагування
-shop.openModalWindowByButton( $("#btn_filter"), $("#modal_filter_id") );
-shop.closeModalWindows();   
+shop.shopTitle();  
 
-shop.formData();                                                                   //Функція створення нового товару
-shop.parseArrToClassItems (shop.arrItems);                                         //Arr of Items from Arr
-//
+//Load Catalog
+// items.updateCatalog();    
+shop.updateArrItemsObj();                                                       
+// shop.getDataFromLocalStorage ("arrItems");                                                                                                     
+// shop.parseArrToClassItems (shop.arrItems);     
+items.loadCatalog (shop.arrItemsObj);       
+
+
+//INFO
 console.log("Local Storage in: ");
 console.log(shop.arrItems);
 console.log("Arr of Items: ");
-console.log(shop.arrItemsObj);
-
-
-//Load Catalog
-items.loadCatalog (shop.arrItemsObj);
-
-//After Catalog Upload
-// shop.openModalWindowByButton( $(".btn_item_edit"), $("#modal_item_add_edit") );            //Edit Button                                 
+console.log(shop.arrItemsObj);                             
 
 shop.showMessage(`Кількість товарів в Local Storage - 
     ${shop.arrItems.length} шт \n
      на сумму ${shop.calcSum()} грн`
     , 2000);
 
+//Events
+shop.formData();   
+shop.openModalWindowByButton( $("#btn_add_item"), $("#modal_item_add_edit") );     //Відкриття для редагування
+shop.openModalWindowByButton( $("#btn_filter"), $("#modal_filter_id") );
+shop.closeModalWindows();   
 items.showItem();
-items.editItem();
-
