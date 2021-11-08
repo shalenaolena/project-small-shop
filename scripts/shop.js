@@ -106,8 +106,6 @@ class Shop {
         
     }
 
-    
-   
 }
 
 
@@ -124,6 +122,7 @@ class Items extends Shop {
         this.itemDescription = itemDescription;
         this.arrItems;
         this.arrItemsObj;
+       
 
     }
 
@@ -262,21 +261,30 @@ class Items extends Shop {
 
                   this.setDataToLocalStorage ("arrItems", this.arrItems);
                   this.getDataFromLocalStorage ("arrItems");
+                  items.loadCatalog (shop.arrItemsObj);
 
                 });
 
-                
-
-            
-
-
-
-
-           
 
         }
 
-        )}
+    )}
+
+    deleteItem() {
+        $("#modal_item_delete_btn").on("click", (event) => {
+
+            let currentItem = this.currentItemAfterEvent("data-btn-open");
+            $("#edit_item_btn").attr('data-btn-open', currentItem.itemId);
+            
+
+            console.log(this.arrItems);
+            console.log(currentItem);
+
+
+
+        })
+       
+    }
 
     
         
@@ -316,3 +324,4 @@ shop.showMessage(`Кількість товарів в Local Storage -
 
 items.showItem();
 items.editItem();
+
