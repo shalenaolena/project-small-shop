@@ -7,7 +7,7 @@ class Shop {
     }
 
     showMessage(massege, time) {
-        console.log(`Massege ${this.arrItems}`);
+        
         $("#modal_massege_id, .modal_massege_overlay").fadeIn();
         $("#modal_massege_text").text(massege);
 
@@ -59,7 +59,7 @@ class Shop {
     }
 
     calcSum() {
-        console.log(this.arrItems);
+        
         let result = 0;
         for (let i = 0; i < this.arrItems.length; i++) {
             result += +this.arrItems[i]["itemPrice"];
@@ -72,7 +72,7 @@ class Shop {
         console.log(`form ${this.arrItems}`);
 
         $("#modal_item_add_edit_btn").on("click", () => {    
-            console.log(`form ${this.arrItems}`);   
+              
 
             let e = document.getElementById("modal_item_select_category");
 
@@ -173,7 +173,7 @@ class Items extends Shop {
             this.getDataFromLocalStorage ("arrItems");
             console.log(`We get data`);
           }).then((data) => {
-            console.log(`upload ${this.arrItems}`);
+    
             //Load Catalog with new this.arrItems
             this.loadCatalog (arr); 
             this.showItem();
@@ -241,7 +241,7 @@ class Items extends Shop {
                 <option value="Other">Інші</option>
               </select>
             <input type="text" name="name" id="edit_item_name" placeholder="Назва">
-            <input type="text" name="price" id="edit_item_price" placeholder="Price">
+            <input type="text" name="price" id="edit_item_price" placeholder="Price" pattern="\d+">
             <input type="text" name="url" id="edit_item_img_url" placeholder="Image URL 500x500" value="img/tit1.jpg">
             <textarea name="description" id="edit_item_description" cols="20" rows="10" placeholder="Опис"></textarea>
             <button id="edit_item_btn">НАДІСЛАТИ</button>`);
@@ -393,7 +393,7 @@ class Items extends Shop {
         $("#filter_submit_id").on("click", (event) => {
             let inputValue = $("#select_filter_category :selected").val();
             let searchArr = this.arrItems;
-            console.log(`filter ${this.arrItems}`);
+            
             searchArr = this.arrItems.filter(function(e) { return e.itemCategory == inputValue 
         })
         console.log(`filter ${this.arrItems}`);
