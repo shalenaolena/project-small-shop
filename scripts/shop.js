@@ -87,10 +87,12 @@ class Items extends Shop {
     }
        
     loadCatalog (arr) {
-        this.getDataFromLocalStorage ("arrItems");
+        const catalogPlace = document.querySelector("#container_items_catalog");
+        catalogPlace.innerHTML="";
+
 
         for (let i = 0; i < arr.length; i++) {
-            document.querySelector("#container_items_catalog").insertAdjacentHTML("afterbegin",
+            catalogPlace.insertAdjacentHTML("afterbegin",
 
                 `<div class="item" id="${i}">
                     <img src="${arr[i].itemImg}" alt="">
@@ -110,10 +112,9 @@ class Items extends Shop {
                     </div>
                 </div> <!--item -->`
 
-                // <div class="btn_item_edit" id="edit${arr[i].itemId}" data-btn-edit="${arr[i].itemId}">
-                    //     <img src="icons/edit.png" alt="">
-                    // </div>
+            
         );  
+        this.listenEvents ();
         }  
     }
 
@@ -316,6 +317,65 @@ class Items extends Shop {
        
     }
 
+    filterWithPromise (searchArr) {
+
+        const promise3 = new Promise((resolve, reject) => {
+        
+            console.log(searchArr);
+            resolve(searchArr);
+            
+            reject("!!! AGAIN ERROR. Обiцянки-цяцянки. Нова позиція");
+          }).then((data) => {
+            //Load Catalog with new this.arrItems
+            this.loadCatalog (data); 
+          });
+        // this.parseArrToClassItems (this.arrItems);
+    }
+
+    searchItem () {
+        $("#search_img").on("click", (event) => {
+
+            let inputValue = $("#input_search_id").val();
+            let searchArr = this.arrItems.filter(function(e) { return e.itemName == inputValue 
+        })
+
+            if ( searchArr.length > 0 ) {
+                this.filterWithPromise (searchArr);
+            } else {
+
+                shop.showMessage(`Нічого не знайдено! Спробуйте ще!`, 2000);
+
+            }
+
+            
+        })
+    }
+
+    filterByCategory () {
+        $("#filter_submit_id").on("click", (event) => {
+            let inputValue = $("#select_filter_category :selected").val();
+            let searchArr = this.arrItems.filter(function(e) { return e.itemCategory == inputValue 
+        })
+
+        if (inputValue !== "All") {
+            this.filterWithPromise (searchArr);
+        } else {
+            this.loadCatalog (this.arrItems);
+        }
+            
+        })
+    }
+
+    listenEvents () {
+        this.formData();
+        this.showItem();
+        this.editItem ();
+        this.deleteItem();
+        this.searchItem();
+        this.filterByCategory();
+
+    }
+
     
         
 
@@ -351,7 +411,4 @@ shop.showMessage(`Кількість товарів в Local Storage -
 shop.openModalWindowByButton( $("#btn_add_item"), $("#modal_item_add_edit") );     //Відкриття для редагування
 shop.openModalWindowByButton( $("#btn_filter"), $("#modal_filter_id") );
 shop.closeModalWindows();   
-items.formData();
-items.showItem();
-items.editItem ();
-items.deleteItem();
+items.listenEvents ();

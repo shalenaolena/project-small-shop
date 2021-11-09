@@ -147,15 +147,15 @@ div.modal_win_info {
 }
 
 .info_img, .info_text {
-    width: 420px;
+    width: 400px;
     height: 90%;
     margin: 10px;
     
 }
 
 .info_img img{
-    max-width: 400px;
-    max-height: 400px;
+    width: 400px;
+    height: 400px;
 }
 
 .info_text {
