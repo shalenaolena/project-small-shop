@@ -57,51 +57,6 @@ class Shop {
 
     }
 
-
-    formData() {
-        this.getDataFromLocalStorage ("arrItems"); 
-
-        $("#modal_item_add_edit_btn").on("click", () => {       
-
-            let e = document.getElementById("modal_item_select_category");
-
-            let itemCategoryData = e.options[e.selectedIndex].value; 
-            let itemNameData = document.querySelector("#modal_form_item_name").value;
-            let itemPriceData = document.querySelector("#modal_form_item_price").value;
-            let itemImgUrlData = document.querySelector("#modal_form_item_img_url").value;
-            let itemDescriptionData = document.querySelector("#modal_form_textarea_item_description").value;
-            let itemIdData = `item${this.arrItems.length}`;
-            
-            let result = new Items (itemIdData, itemNameData, itemCategoryData, itemPriceData, itemImgUrlData, itemDescriptionData);
-            this.arrItems.push(result);
-            this.setDataToLocalStorage ("arrItems", this.arrItems);
-            this.getDataFromLocalStorage ("arrItems");
-            // this.parseArrToClassItems (this.arrItems);
-
-        }) 
-    }
-
-    parseArrToClassItems () {
-        let newItems;
-        //console.log(`!!!${this.arrItems.length}`);
-        for (let i = 0; i < this.arrItems.length; i++) {
-            newItems = new Items (
-            this.arrItems[i]["itemId"], 
-            this.arrItems[i].itemName, 
-            this.arrItems[i].itemCategory, 
-            +this.arrItems[i].itemPrice, 
-            this.arrItems[i].itemImg, 
-            this.arrItems[i].itemDescription);
-            
-            this.arrItemsObj.push(newItems);
-        }
-    }
-
-    updateArrItemsObj() {
-        this.getDataFromLocalStorage ("arrItems");                                                                                                      
-        this.parseArrToClassItems (this.arrItems); 
-    }
-
     calcSum() {
         let result = 0;
         for (let i = 0; i < this.arrItems.length; i++) {
@@ -110,8 +65,6 @@ class Shop {
         return result;
         
     }
-
-    
 
    
 }
@@ -132,8 +85,9 @@ class Items extends Shop {
         this.arrItemsObj = this.arrItemsObj;
 
     }
-
+       
     loadCatalog (arr) {
+        this.getDataFromLocalStorage ("arrItems");
 
         for (let i = 0; i < arr.length; i++) {
             document.querySelector("#container_items_catalog").insertAdjacentHTML("afterbegin",
@@ -161,6 +115,65 @@ class Items extends Shop {
                     // </div>
         );  
         }  
+    }
+
+    uploadNewCatalog (arr) {
+        const promise1 = new Promise((resolve, reject) => {
+            //Send Data to Local Storage
+            this.setDataToLocalStorage ("arrItems", arr);
+            resolve(arr);
+            console.log(`changes was send!`);
+            reject("!!! AGAIN ERROR. Обыцянки-цяцянки");
+          }).then((data) => {
+            // data - this.arrItems
+            //Get Data from Local Storage
+            this.getDataFromLocalStorage ("arrItems");
+            console.log(`We get data`);
+          }).then((data) => {
+            //Load Catalog with new this.arrItems
+            this.loadCatalog (arr); 
+            this.showItem();
+          });
+
+    }
+
+    formData() {
+        this.getDataFromLocalStorage ("arrItems"); 
+
+        $("#modal_item_add_edit_btn").on("click", () => {       
+
+            let e = document.getElementById("modal_item_select_category");
+
+            let itemCategoryData = e.options[e.selectedIndex].value; 
+            let itemNameData = document.querySelector("#modal_form_item_name").value;
+            let itemPriceData = document.querySelector("#modal_form_item_price").value;
+            let itemImgUrlData = document.querySelector("#modal_form_item_img_url").value;
+            let itemDescriptionData = document.querySelector("#modal_form_textarea_item_description").value;
+            let itemIdData = `item${this.arrItems.length}`;
+            
+            let result = new Items (itemIdData, itemNameData, itemCategoryData, itemPriceData, itemImgUrlData, itemDescriptionData);
+            // this.arrItems.push(result);
+
+            this.arrItems.push(result);
+            this.setDataToLocalStorage ("arrItems", this.arrItems);
+
+
+            //this.getDataFromLocalStorage ("arrItems");
+
+            const promise1 = new Promise((resolve, reject) => {
+                //Send Data to Local Storage
+                this.getDataFromLocalStorage ("arrItems");
+                resolve(this.arrItems);
+                console.log(`We ger new this.arrItems`);
+                reject("!!! AGAIN ERROR. Обiцянки-цяцянки. Нова позиція");
+              }).then((data) => {
+                //Load Catalog with new this.arrItems
+                this.loadCatalog (data); 
+                this.showItem();
+              });
+            // this.parseArrToClassItems (this.arrItems);
+
+        }) 
     }
 
     currentItemAfterEvent (dataAtr) {
@@ -205,8 +218,7 @@ class Items extends Shop {
             $("#item_category_info_id").html(currentItem.itemCategory);
             // event.stopPropagation();
 
-            this.editItem ();
-            this.deleteItem();
+            
            })    
     }
 
@@ -266,11 +278,9 @@ class Items extends Shop {
                   });
 
                   this.setDataToLocalStorage ("arrItems", this.arrItems);
-                  //this.updateArrItemsObj(); 
                   console.log(this.arrItemsObj);
-                  this.updateArrItemsObj();
-                  this.loadCatalog (this.arrItemsObj);
-                  shop.closeModalWindows();
+                  this.uploadNewCatalog (this.arrItems);
+                  
                   
 
                 });
@@ -288,29 +298,18 @@ class Items extends Shop {
             let currentItem = this.currentItemAfterEvent("data-btn-open");
             $("#edit_item_btn").attr('data-btn-open', currentItem.itemId);
             
-            console.log(this.arrItems);      //arr
-            console.log(currentItem.itemId); //item17
+            console.log(`Current item: ${currentItem.itemId}`); //item17
 
             let isTrue = confirm("Видалити? ТОЧНО?!?");
 
             if (isTrue) {
                 this.arrItems = this.arrItems.filter(function(e) { return e.itemId !== currentItem.itemId 
                 })
-            console.log(`New this.arrItems: ${this.arrItems}`);
+            console.log(`New items count: ${this.arrItems.length}`);
 
+            this.uploadNewCatalog (this.arrItems);
 
-            //Send Data to Local Storage
-            this.setDataToLocalStorage ("arrItems", this.arrItems);
-            //Get Data from Local Storage
-            this.getDataFromLocalStorage ("arrItems");
             
-            //Parse Data to Items
-            this.parseArrToClassItems (this.arrItems);
-            // result - new this.arrItemsObj
-
-            //Load Catalog with new this.arrItemsObj
-            this.loadCatalog (this.arrItemsObj);
-                
             }
 
         })
@@ -331,18 +330,16 @@ shop.shopTitle();
 
 //Load Catalog
     
-shop.updateArrItemsObj();      
+shop.getDataFromLocalStorage ("arrItems");      
 // shop.getDataFromLocalStorage ("arrItems");                                                                                                      
 // shop.parseArrToClassItems (shop.arrItems);                                                 
     
-items.loadCatalog (shop.arrItemsObj);       
+items.loadCatalog (shop.arrItems);       
 
 
 //INFO
 console.log("Local Storage in: ");
-console.log(shop.arrItems);
-console.log("Arr of Items: ");
-console.log(shop.arrItemsObj);                             
+console.log(shop.arrItems);                            
 
 shop.showMessage(`Кількість товарів в Local Storage - 
     ${shop.arrItems.length} шт \n
@@ -350,8 +347,11 @@ shop.showMessage(`Кількість товарів в Local Storage -
     , 2000);
 
 //Events
-shop.formData();   
+   
 shop.openModalWindowByButton( $("#btn_add_item"), $("#modal_item_add_edit") );     //Відкриття для редагування
 shop.openModalWindowByButton( $("#btn_filter"), $("#modal_filter_id") );
 shop.closeModalWindows();   
+items.formData();
 items.showItem();
+items.editItem ();
+items.deleteItem();
