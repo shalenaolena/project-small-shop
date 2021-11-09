@@ -270,6 +270,7 @@ class Items extends Shop {
                   console.log(this.arrItemsObj);
                   this.updateArrItemsObj();
                   this.loadCatalog (this.arrItemsObj);
+                  shop.closeModalWindows();
                   
 
                 });
@@ -280,6 +281,8 @@ class Items extends Shop {
     )}
 
     deleteItem() {
+          
+        //Delete logic
         $("#modal_item_delete_btn").on("click", (event) => {
 
             let currentItem = this.currentItemAfterEvent("data-btn-open");
@@ -293,10 +296,20 @@ class Items extends Shop {
             if (isTrue) {
                 this.arrItems = this.arrItems.filter(function(e) { return e.itemId !== currentItem.itemId 
                 })
-            console.log(this.arrItems);
+            console.log(`New this.arrItems: ${this.arrItems}`);
+
+
+            //Send Data to Local Storage
             this.setDataToLocalStorage ("arrItems", this.arrItems);
+            //Get Data from Local Storage
             this.getDataFromLocalStorage ("arrItems");
+            
+            //Parse Data to Items
             this.parseArrToClassItems (this.arrItems);
+            // result - new this.arrItemsObj
+
+            //Load Catalog with new this.arrItemsObj
+            this.loadCatalog (this.arrItemsObj);
                 
             }
 

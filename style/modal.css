@@ -223,6 +223,7 @@ div.modal_win_info {
 .modal_massege_overlay {
     display: none;
     position: relative;
+    z-index: 5;
 }
 .modal_massege {
     width: 300px;
@@ -231,7 +232,7 @@ div.modal_win_info {
     padding: 10px;
 
     position: fixed;
-    top: 20px;
+    top: 5px;
     left: 50%;
 
     background-color: rgba(76, 170, 84, 0.8);
