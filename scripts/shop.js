@@ -83,7 +83,7 @@ class Shop {
 
     parseArrToClassItems () {
         let newItems;
-        console.log(`!!!${this.arrItems.length}`);
+        //console.log(`!!!${this.arrItems.length}`);
         for (let i = 0; i < this.arrItems.length; i++) {
             newItems = new Items (
             this.arrItems[i]["itemId"], 
@@ -111,30 +111,7 @@ class Shop {
         
     }
 
-    deleteItem() {
-        $("#modal_item_delete_btn").on("click", (event) => {
-
-            let currentItem = this.currentItemAfterEvent("data-btn-open");
-            $("#edit_item_btn").attr('data-btn-open', currentItem.itemId);
-            
-            console.log(this.arrItems);      //arr
-            console.log(currentItem.itemId); //item17
-
-            let isTrue = confirm("Видалити? ТОЧНО?!?");
-
-            if (isTrue) {
-                this.arrItems = this.arrItems.filter(function(e) { return e.itemId !== currentItem.itemId 
-                })
-            console.log(this.arrItems);
-            this.setDataToLocalStorage ("arrItems", this.arrItems);
-            this.getDataFromLocalStorage ("arrItems");
-            this.parseArrToClassItems (this.arrItems);
-                
-            }
-
-        })
-       
-    }
+    
 
    
 }
@@ -213,7 +190,7 @@ class Items extends Shop {
         </ul> `
             );
             
-            this.openModalWinWithOutEvent($("#modal_win_info_id"));
+            this.openModalWinWithOutEvent($("#overlay_info_id"));
 
             let currentItem = this.currentItemAfterEvent("data-btn-open");
             $("#modal_item_edit_btn").attr('data-btn-open', currentItem.itemId);
@@ -291,7 +268,7 @@ class Items extends Shop {
                   this.setDataToLocalStorage ("arrItems", this.arrItems);
                   //this.updateArrItemsObj(); 
                   console.log(this.arrItemsObj);
-                  shop.updateArrItemsObj();
+                  this.updateArrItemsObj();
                   this.loadCatalog (this.arrItemsObj);
                   
 
@@ -301,6 +278,31 @@ class Items extends Shop {
         }
 
     )}
+
+    deleteItem() {
+        $("#modal_item_delete_btn").on("click", (event) => {
+
+            let currentItem = this.currentItemAfterEvent("data-btn-open");
+            $("#edit_item_btn").attr('data-btn-open', currentItem.itemId);
+            
+            console.log(this.arrItems);      //arr
+            console.log(currentItem.itemId); //item17
+
+            let isTrue = confirm("Видалити? ТОЧНО?!?");
+
+            if (isTrue) {
+                this.arrItems = this.arrItems.filter(function(e) { return e.itemId !== currentItem.itemId 
+                })
+            console.log(this.arrItems);
+            this.setDataToLocalStorage ("arrItems", this.arrItems);
+            this.getDataFromLocalStorage ("arrItems");
+            this.parseArrToClassItems (this.arrItems);
+                
+            }
+
+        })
+       
+    }
 
     
         
@@ -315,10 +317,11 @@ const items = new Items();                                                      
 shop.shopTitle();  
 
 //Load Catalog
-// items.updateCatalog();    
-shop.updateArrItemsObj();                                                       
-// shop.getDataFromLocalStorage ("arrItems");                                                                                                     
-// shop.parseArrToClassItems (shop.arrItems);     
+    
+shop.updateArrItemsObj();      
+// shop.getDataFromLocalStorage ("arrItems");                                                                                                      
+// shop.parseArrToClassItems (shop.arrItems);                                                 
+    
 items.loadCatalog (shop.arrItemsObj);       
 
 
