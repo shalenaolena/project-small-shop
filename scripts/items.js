@@ -39,9 +39,9 @@ class Items extends Shop {
 
             
         );  
-        
-    
         }  
+        items.showItem();
+
     }
 
     uploadNewCatalog (arr) {
@@ -69,7 +69,6 @@ class Items extends Shop {
 
     }
 
-    
 
     currentItemAfterEvent (dataAtr) {
         
@@ -233,43 +232,6 @@ class Items extends Shop {
         
     }
 
-    // searchItem () {
-    //     $("#search_img").on("click", (event) => {
-    //         console.log("search");
-
-    //         let inputValue = $("#input_search_id").val();
-    //         let searchArr = this.arrItems.filter(function(e) { return e.itemName == inputValue 
-    //     })
-
-    //         if ( searchArr.length > 0 ) {
-    //             this.filterWithPromise (searchArr);
-    //         } else {
-    //             shop.showMessage(`Нічого не знайдено! Спробуйте ще!`, 2000);
-    //         }
-            
-    //     })
-    // }
-
-
-    // searchItem () {
-    //     $("#search_img").on("click", (event) => {
-    //         let inputValue = $("#input_search_id").val();
-    //         let searchArr = this.arrItems.filter(function(e) { return e.itemName == inputValue 
-    //     })
-    //     console.log(`search ${this.arrItems}`);
-    //     console.log(`search ${searchArr}`);
-
-    //     // this.sortItems (searchArr);
-
-    //     if (inputValue !== []) {
-    //         this.filterWithPromise (searchArr);
-    //     } else {
-    //         this.loadCatalog (this.arrItems);
-
-    //     }
-            
-    //     })
-    // }
 
     createNewArrWithFilter (prop, inputValue, arr) {
         let result;
@@ -315,14 +277,7 @@ class Items extends Shop {
         })
     }
 
-    // findAndLoad (btn, inputValue, prop, searchArr) {
-    //     btn.on("click", (event) => {
-    //         searchArr = this.createNewArrWithFilter (prop, inputValue, searchArr);
-    //         // searchArr = this.arrItems.filter(function(e) { return e.itemCategory == inputValue})
-    //         console.log(`filter ${this.arrItems}`);
-    //         console.log(`filter ${searchArr}`);
-    //     })
-    // }
+    
 
     searchItem() {
         $("#search_img").on("click", (event) => {
@@ -385,12 +340,10 @@ class Items extends Shop {
 
 const items = new Items();   
 items.loadCatalog (shop.arrItems);   
-
 items.sortCatalog ();
 items.searchItem();
 items.formData();
 items.showItem();
-items.editItem ();
+items.editItem();
 items.deleteItem();
-
 items.filterByCategory();
