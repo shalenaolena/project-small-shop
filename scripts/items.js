@@ -293,6 +293,7 @@ class Items extends Shop {
                 arr = this.arrItems;
                 let prop = "itemName";
                 this.sortByProp (prop, arr);
+                arr.reverse();
                 this.loadCatalog (arr);
 
             } else if ( inputValue == "by_price") {
