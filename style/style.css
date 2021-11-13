@@ -74,14 +74,14 @@ div#buttons img {
 .header_input_search input:focus {
   width: 350px;
 }
-.header_input_search button {
+div#search_btn {
   width: 65px;
   height: 65px;
   background: none;
   border: none;
   position: absolute;
-  right: 40px;
-  top: -11px;
+  right: 20px;
+  top: 1px;
   cursor: pointer;
 }
 
