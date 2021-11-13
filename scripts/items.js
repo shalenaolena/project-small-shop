@@ -247,27 +247,29 @@ class Items extends Shop {
 
 
     sortCatalog (arr) {
+            let arrSort;
         $("#sort_submit_id").on("click", (event) => {
 
             let inputValue = $("#select_filter_sort :selected").val();
-
-            if ( inputValue == "by_name" ) {
                 arr = this.arrItems;
+            if ( inputValue == "by_name" ) {
+                
                 let prop = "itemName";
-                this.sortByProp (prop, arr);
-                arr.reverse();
-                this.loadCatalog (arr);
+                arrSort = this.sortByProp (prop, arr);
+                arrSort.reverse();
+                this.loadCatalog (arrSort);
 
             } else if ( inputValue == "by_price") {
-                arr = this.arrItems;
+                
                 
                 let prop = "itemPrice";
-                arr.sort(function(a, b) {
+                arrSort = arr.sort(function(a, b) {
                     return parseFloat(a[prop]) - parseFloat(b[prop]);
                 });
-                console.log(arr);
-                arr.reverse();
-                this.loadCatalog (arr);
+                console.log(arrSort);
+                console.log(arrSort);
+                arrSort.reverse();
+                this.loadCatalog (arrSort);
                 
     
             } else {
