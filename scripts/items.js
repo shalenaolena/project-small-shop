@@ -12,7 +12,7 @@ class Items extends Shop {
 
     }
        
-    loadCatalog (arr) {
+    loadCatalog (arr = shop.arrItems) {
         
         rootCatalogPlace.innerHTML="";
 
@@ -31,7 +31,7 @@ class Items extends Shop {
                                 Деталі
                             </div>
                             <div class="item_btn_add_to_cart">
-                                    <img src="icons/white-cart.png" alt="">
+                                    <img class="cart_img" data-btn-cart="${arr[i].itemId}" src="icons/white-cart.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -70,11 +70,18 @@ class Items extends Shop {
     }
 
 
-    currentItemAfterEvent (dataAtr) {
+    currentItemAfterEvent (dataAtr, event) {
+        let target = event.target;
         
         this.getDataFromLocalStorage ("arrItems");
-        let buttonData = event.currentTarget.getAttribute(dataAtr);            
-        return this.arrItems.find(item => item.itemId == buttonData);
+
+        let currentItemId = target.getAttribute(dataAtr);
+
+        return this.arrItems.find(item => item.itemId == currentItemId);
+        
+        // this.getDataFromLocalStorage ("arrItems");
+        // let buttonData = event.currentTarget.getAttribute(dataAtr);            
+        // return this.arrItems.find(item => item.itemId == buttonData);
         
     }
 
@@ -99,7 +106,7 @@ class Items extends Shop {
             
             this.openModalWinWithOutEvent($("#overlay_info_id"));
 
-            let currentItem = this.currentItemAfterEvent("data-btn-open");
+            let currentItem = this.currentItemAfterEvent("data-btn-open", event);
             $("#modal_item_edit_btn").attr('data-btn-open', currentItem.itemId);
             $("#modal_item_delete_btn").attr('data-btn-open', currentItem.itemId);
 
@@ -135,7 +142,7 @@ class Items extends Shop {
                 <textarea name="description" id="edit_item_description" cols="20" rows="10" placeholder="Опис"></textarea>
                 <button id="edit_item_btn">НАДІСЛАТИ</button>`);
 
-                let currentItem = this.currentItemAfterEvent("data-btn-open");
+                let currentItem = this.currentItemAfterEvent("data-btn-open", event);
                 $("#edit_item_btn").attr('data-btn-open', currentItem.itemId);
                 
 
@@ -193,7 +200,7 @@ class Items extends Shop {
         //Delete logic
         $("#modal_item_delete_btn").on("click", (event) => {
 
-            let currentItem = this.currentItemAfterEvent("data-btn-open");
+            let currentItem = this.currentItemAfterEvent("data-btn-open", event);
             $("#edit_item_btn").attr('data-btn-open', currentItem.itemId);
             
             console.log(`Current item: ${currentItem.itemId}`); //item17
@@ -341,7 +348,7 @@ class Items extends Shop {
 }
 
 const items = new Items();   
-items.loadCatalog (shop.arrItems);   
+items.loadCatalog ();   
 items.sortCatalog ();
 items.searchItem();
 items.formData();
